@@ -3,7 +3,8 @@ ROUTERD_USER = "root"
 
 apply: .kubeconfig
 	export KUBECONFIG=$$PWD/.kubeconfig \
-		&& kubectl apply -f manifests/cluster-network-addons-operator/
+		&& kubectl apply -f manifests/cluster-network-addons-operator/ \
+		&& kubectl apply -f manifests/cluster-network-addons-operator-config/
 .PHONY: apply
 
 sync:
