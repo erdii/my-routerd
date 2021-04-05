@@ -15,6 +15,9 @@ sync:
 	rsync -rv --delete-after \
 		"files/etc/systemd/system/k3s.service.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/system/k3s.service.d/"
+
+	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" networkctl reload
+	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" systemctl daemon-reload
 .PHONY: sync
 
 .kubeconfig:
