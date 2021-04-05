@@ -1,11 +1,16 @@
 ROUTERD_IP = "192.168.185.23"
 ROUTERD_USER = "root"
 
-apply: .kubeconfig
+apply-base: .kubeconfig
 	export KUBECONFIG=$$PWD/.kubeconfig \
 		&& kubectl apply -f manifests/cluster-network-addons-operator/ \
-		&& kubectl apply -f manifests/cluster-network-addons-operator-config/
-.PHONY: apply
+		&& kubectl apply -f manifests/cluster-network-addons-operator-config/ \
+.PHONY: apply-base
+
+apply-routerd: .kubeconfig
+	export KUBECONFIG=$$PWD/.kubeconfig \
+		&& kubectl apply -f manifests/routerd
+.PHONY: apply-routerd
 
 sync:
 	rsync -rv --delete-after \

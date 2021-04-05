@@ -1,0 +1,80 @@
+apiVersion: ipam.routerd.net/v1alpha1
+kind: IPv4Pool
+metadata:
+  name: lan1
+  namespace: network-system
+spec:
+  cidr: 192.168.35.0/24
+  leaseDuration: 24h
+---
+apiVersion: ipam.routerd.net/v1alpha1
+kind: IPv6Pool
+metadata:
+  name: lan1
+  namespace: network-system
+spec:
+  cidr: fdb6:041f:93aa:0:0:35::/96
+  leaseDuration: 24h
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: br-lan1-static
+  namespace: network-system
+spec:
+  config: |-
+    {
+      "cniVersion": "0.3.1",
+      "name": "br-lan1-static",
+      "plugins": [
+        {
+          "bridge": "br-lan1",
+          "ipam": {
+            "type": "static"
+          },
+          "type": "bridge"
+        }
+      ]
+    }
+---
+apiVersion: dhcp.routerd.net/v1alpha1
+kind: DHCPServer
+metadata:
+  name: lan1
+  namespace: network-system
+spec:
+  ipv4:
+    pool:
+      name: lan1
+    gateway: 192.168.35.1
+    nameServers:
+    - 192.168.35.3
+
+  ipv6:
+    pool:
+      name: lan1
+    gateway: "fdb6:041f:93aa:0:0:35::1"
+    nameServers:
+    - "fdb6:041f:93aa:0:0:35::3"
+
+  networkAttachmentDefinition:
+    name: br-lan1-static
+---
+apiVersion: dns.routerd.net/v1alpha1
+kind: DNSServer
+metadata:
+  name: lan1
+  namespace: network-system
+spec:
+  forward:
+    from: "."
+    to: ["9.9.9.9"]
+    except: ["home.erdii.net"]
+    policy: Random
+  networkAttachment:
+    networkAttachmentDefinition:
+      name: br-lan1-static
+    ipv4Pool:
+      name: lan1
+    ipv6Pool:
+      name: lan1
