@@ -4,7 +4,7 @@ ROUTERD_USER = "root"
 apply-base: .kubeconfig
 	export KUBECONFIG=$$PWD/.kubeconfig \
 		&& kubectl apply -f manifests/cluster-network-addons-operator/ \
-		&& kubectl apply -f manifests/cluster-network-addons-operator-config/ \
+		&& kubectl apply -f manifests/cluster-network-addons-operator-config/
 .PHONY: apply-base
 
 apply-routerd: .kubeconfig
@@ -24,6 +24,10 @@ sync:
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" networkctl reload
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" systemctl daemon-reload
 .PHONY: sync
+
+ssh-tunnel:
+	ssh -L 6443:127.0.0.1:6443 "$(ROUTERD_USER)@$(ROUTERD_IP)" ping 1.1.1.1
+.PHONY: ssh-tunnel
 
 .kubeconfig:
 	rsync -v \
