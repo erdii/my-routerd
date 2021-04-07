@@ -7,7 +7,7 @@ AllMulticast=yes
 
 [Network]
 Address=192.168.35.1/24
-Address==fdb6:041f:93aa:0:0:35::1/96
+Address=fdb6:041f:93aa:0:0:35::1/96
 DHCP=no
 IPv6AcceptRA=no
 IPv6PrefixDelegation=static
@@ -17,7 +17,6 @@ IPForward=yes
 Managed=yes
 OtherInformation=yes
 DNS=fdb6:041f:93aa:0:0:35::1/96
-DHCP=no
 
 [IPv6Prefix]
 Prefix=fdb6:041f:93aa:0:0:35::1/96
