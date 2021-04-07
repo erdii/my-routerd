@@ -1,4 +1,4 @@
-ROUTERD_IP = "192.168.185.23"
+ROUTERD_IP = "192.168.35.1"
 ROUTERD_USER = "root"
 
 apply-base: .kubeconfig
@@ -13,13 +13,15 @@ apply-routerd: .kubeconfig
 .PHONY: apply-routerd
 
 sync:
-	rsync -rv --delete-after \
+	rsync -rv \
+	--perms \
+	--delete-after \
 		"files/etc/systemd/network/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/network/"
 
 	rsync -rv --delete-after \
-		"files/etc/systemd/system/k3s.service.d/" \
-		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/system/k3s.service.d/"
+		"files/etc/systemd/system/crio.service.d/" \
+		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/system/crio.service.d/"
 
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" networkctl reload
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" systemctl daemon-reload
