@@ -23,6 +23,7 @@ sync:
 		"files/etc/systemd/system/crio.service.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/system/crio.service.d/"
 
+	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" mkdir -p /etc/cni/net.d/
 	rsync -rv --delete-after \
 		"files/etc/cni/net.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/cni/net.d/"
@@ -45,6 +46,12 @@ ssh-tunnel:
 .PHONY: ssh-tunnel
 
 .kubeconfig:
-	rsync -v \
-		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/kubernetes/admin.conf" \
-		.kubeconfig
+	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" \
+		cat /etc/kubernetes/admin.conf \
+			| sed 's/192.168.255.1:6443/127.0.0.1:6443/' \
+			> .kubeconfig
+
+reset:
+	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" kubeadm reset -f \
+		&& rm -rf /etc/cni /opt/cni \
+		&& ipvsadm --clear
