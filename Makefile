@@ -23,6 +23,19 @@ sync:
 		"files/etc/systemd/system/crio.service.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/system/crio.service.d/"
 
+	rsync -rv --delete-after \
+		"files/etc/cni/net.d/" \
+		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/cni/net.d/"
+
+	rsync -rv --delete-after \
+		"files/etc/nftables.conf" \
+		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/nftables.conf"
+
+	rsync -rv --delete-after \
+		"manifests/cluster/kubeadm.yaml" \
+		"$(ROUTERD_USER)@$(ROUTERD_IP):kubeadm.yaml"
+
+	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" nft -f /etc/nftables.conf
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" networkctl reload
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" systemctl daemon-reload
 .PHONY: sync
@@ -33,5 +46,5 @@ ssh-tunnel:
 
 .kubeconfig:
 	rsync -v \
-		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/rancher/k3s/k3s.yaml" \
+		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/kubernetes/admin.conf" \
 		.kubeconfig
