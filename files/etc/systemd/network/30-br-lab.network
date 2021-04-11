@@ -1,5 +1,5 @@
 [Match]
-Name=br-lan1
+Name=br-lab
 
 [Link]
 Multicast=yes
@@ -7,7 +7,7 @@ AllMulticast=yes
 
 [Network]
 Address=192.168.35.1/24
-Address=fdb6:041f:93aa:0:0:35::1/96
+Address=fd37:dc42:5e0a:0035::1/64
 DHCP=no
 IPv6AcceptRA=no
 IPv6PrefixDelegation=static
@@ -16,8 +16,8 @@ IPForward=yes
 [IPv6PrefixDelegation]
 Managed=yes
 OtherInformation=yes
-DNS=fdb6:041f:93aa:0:0:35::1/96
+DNS=fd37:dc42:5e0a:0035::1/64
 
 [IPv6Prefix]
-Prefix=fdb6:041f:93aa:0:0:35::1/96
+Prefix=fd37:dc42:5e0a:0035::1/64
 OnLink=yes

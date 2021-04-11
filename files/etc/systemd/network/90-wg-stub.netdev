@@ -1,7 +1,7 @@
 [NetDev]
 Name=wg-stub
 Kind=wireguard
-Description=WireGuard stub 192.168.255.1
+Description=WireGuard stub
 
 [WireGuard]
 PrivateKey=CF/m+JW6aRMDiyiZnhpJN7OuIOYRDPRJj+TGcyZMc14=

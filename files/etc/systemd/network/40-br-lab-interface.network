@@ -2,4 +2,4 @@
 Name=enp1s0
 
 [Network]
-Bridge=br-lan1
+Bridge=br-lab
