@@ -14,8 +14,8 @@ apply-routerd: .kubeconfig
 
 sync:
 	rsync -rv \
-	--perms \
-	--delete-after \
+		--perms \
+		--delete-after \
 		"files/etc/systemd/network/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/network/"
 
@@ -23,16 +23,20 @@ sync:
 		"files/etc/systemd/system/crio.service.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/systemd/system/crio.service.d/"
 
+	rsync -rv \
+		"files/etc/crio/crio.conf" \
+		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/crio/crio.conf"
+
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" mkdir -p /etc/cni/net.d/
 	rsync -rv --delete-after \
 		"files/etc/cni/net.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/cni/net.d/"
 
-	rsync -rv --delete-after \
+	rsync -rv \
 		"files/etc/nftables.conf" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/nftables.conf"
 
-	rsync -rv --delete-after \
+	rsync -rv \
 		"manifests/cluster/kubeadm.yaml" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):kubeadm.yaml"
 
