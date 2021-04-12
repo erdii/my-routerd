@@ -27,3 +27,5 @@ subnet id: t4ju
 | k8s        | fd37:dc42:5e0a:640e::/63 |                  |
 | k8s Pod    | fd37:dc42:5e0a:640e::/64 | 10.244.0.0/16    |
 | k8s SVC    | fd37:dc42:5e0a:640f::/64 | 10.96.0.0/12     |
+
+https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks
