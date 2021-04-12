@@ -1,0 +1,22 @@
+apiVersion: dhcp.routerd.net/v1alpha1
+kind: DHCPServer
+metadata:
+  name: lab
+  namespace: network-system
+spec:
+  ipv4:
+    pool:
+      name: lab
+    gateway: 192.168.35.1
+    nameServers:
+    - 192.168.35.4
+
+  ipv6:
+    pool:
+      name: lab
+    gateway: "fd37:dc42:5e0a:0035::1"
+    nameServers:
+    - "fd37:dc42:5e0a:0035::4"
+
+  networkAttachmentDefinition:
+    name: br-lab-static
