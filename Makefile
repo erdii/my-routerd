@@ -1,6 +1,8 @@
 ROUTERD_IP = "192.168.35.1"
 ROUTERD_USER = "root"
 
+kubeconfig: .kubeconfig
+
 apply-base: .kubeconfig
 	export KUBECONFIG=$$PWD/.kubeconfig \
 		&& kubectl apply -f manifests/cluster-network-addons-operator/ \
@@ -28,7 +30,7 @@ sync:
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/crio/crio.conf"
 
 	ssh "$(ROUTERD_USER)@$(ROUTERD_IP)" mkdir -p /etc/cni/net.d/
-	rsync -rv --delete-after \
+	rsync -rv \
 		"files/etc/cni/net.d/" \
 		"$(ROUTERD_USER)@$(ROUTERD_IP):/etc/cni/net.d/"
 
