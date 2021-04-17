@@ -3,3 +3,6 @@ Name=enp1s0
 
 [Network]
 Bridge=br-lab
+
+[Link]
+RequiredForOnline=no

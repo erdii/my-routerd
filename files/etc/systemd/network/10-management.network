@@ -7,3 +7,6 @@ Address=fd37:dc42:5e0a:0034::1/64
 IPForward=yes
 DHCP=no
 IPv6AcceptRA=no
+
+[Link]
+RequiredForOnline=no
