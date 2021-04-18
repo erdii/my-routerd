@@ -8,7 +8,7 @@ spec:
   selector:
     app.kubernetes.io/name: routerd-dns
     app.kubernetes.io/managed-by: routerd
-    app.kubernetes.io/instance: core
+    app.kubernetes.io/instance: lab
   ports:
     - name: dns-tcp
       protocol: TCP

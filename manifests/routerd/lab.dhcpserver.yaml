@@ -9,13 +9,13 @@ spec:
       name: lab
     gateway: 192.168.35.1
     nameServers:
-    - 192.168.35.3
+    - 192.168.35.2
 
   ipv6:
     pool:
       name: lab
     gateway: "fd37:dc42:5e0a:0035::1"
     nameServers:
-    - "fd37:dc42:5e0a:0035::3"
+    - "fd37:dc42:5e0a:0035::2"
 
   hostInterfaceName: br-lab
