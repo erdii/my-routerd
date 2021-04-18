@@ -1,0 +1,23 @@
+apiVersion: ipam.routerd.net/v1alpha1
+kind: IPv4Lease
+metadata:
+  name: lab-dns
+  namespace: network-system
+spec:
+  type: Static
+  pool:
+    name: lab
+  static:
+    address: 192.168.35.2
+---
+apiVersion: ipam.routerd.net/v1alpha1
+kind: IPv6Lease
+metadata:
+  name: lab-dns
+  namespace: network-system
+spec:
+  type: Static
+  pool:
+    name: lab
+  static:
+    address: fd37:dc42:5e0a:0035::2

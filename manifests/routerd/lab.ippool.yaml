@@ -5,7 +5,7 @@ metadata:
   namespace: network-system
 spec:
   cidr: 192.168.35.0/24
-  leaseDuration: 24h
+  leaseDuration: 336h
 ---
 apiVersion: ipam.routerd.net/v1alpha1
 kind: IPv6Pool
@@ -14,4 +14,4 @@ metadata:
   namespace: network-system
 spec:
   cidr: fd37:dc42:5e0a:0035::/64
-  leaseDuration: 24h
+  leaseDuration: 336h

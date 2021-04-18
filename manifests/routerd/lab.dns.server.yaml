@@ -9,10 +9,3 @@ spec:
     to: ["9.9.9.9"]
     except: ["home.erdii.net"]
     policy: Random
-  networkAttachment:
-    networkAttachmentDefinition:
-      name: br-lab-static
-    ipv4Pool:
-      name: lab
-    ipv6Pool:
-      name: lab
