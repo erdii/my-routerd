@@ -3,6 +3,7 @@ Name=enp1s0
 
 [Network]
 Bridge=br-lab
+VLAN=lan.30
 
 [Link]
 RequiredForOnline=no
