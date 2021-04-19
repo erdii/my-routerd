@@ -1,0 +1,8 @@
+[Match]
+Name=lan.30
+
+[Network]
+DHCP=yes
+
+[DHCP]
+UseRoutes=false
