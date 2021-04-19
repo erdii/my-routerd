@@ -1,0 +1,40 @@
+apiVersion: dns.routerd.net/v1alpha1
+kind: Zone
+metadata:
+  name: home.erdii.net
+  namespace: network-system
+zone:
+  soa:
+    ttl: 3600s
+    master: ns1.home.erdii.net
+    admin: hostmaster.erdii.net
+    # below are defaults
+    refresh: 24h
+    retry: 2h
+    expire: 1000h
+    negativeTTL: 48h
+    serial: 0
+---
+apiVersion: dns.routerd.net/v1alpha1
+kind: RecordSet
+metadata:
+  name: core-a
+  namespace: network-system
+recordSet:
+  dnsName: core.home.erdii.net
+  ttl: 15m
+  type: A
+  a:
+  - 192.168.35.1
+---
+apiVersion: dns.routerd.net/v1alpha1
+kind: RecordSet
+metadata:
+  name: core-aaaa
+  namespace: network-system
+recordSet:
+  dnsName: core.home.erdii.net
+  ttl: 15m
+  type: AAAA
+  aaaa:
+  - fd37:dc42:5e0a:35::1

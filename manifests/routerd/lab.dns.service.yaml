@@ -4,6 +4,8 @@ metadata:
   name: lab-dns
   namespace: network-system
 spec:
+  type: NodePort
+  externalTrafficPolicy: Local
   ipFamilyPolicy: PreferDualStack
   selector:
     app.kubernetes.io/name: routerd-dns
