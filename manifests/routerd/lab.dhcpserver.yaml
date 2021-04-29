@@ -19,3 +19,4 @@ spec:
     - "fd37:dc42:5e0a:0035::2"
 
   hostInterfaceName: br-lab
+  domain: lab.erdii.net

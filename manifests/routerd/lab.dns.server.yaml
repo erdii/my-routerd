@@ -4,11 +4,13 @@ metadata:
   name: lab
   namespace: network-system
 spec:
-  replicas: 2
+  # with 2 replicas, every other request timed out
+  # nevermind - this also happens with 1 replica
+  replicas: 1
   forward:
     from: "."
     to: ["9.9.9.9"]
-    except: ["home.erdii.net"]
+    except: ["lab.erdii.net"]
     policy: Random
   cache:
     ttl: 86400s
