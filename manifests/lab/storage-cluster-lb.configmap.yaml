@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: storage-cluster-lb
+  namespace: lab
+data:
+  gobetween.toml: |-
+    [api]
+    enabled = true
+    bind = ":8181"
+
+    [servers.default]
+    protocol = "tcp"
+    bind = ":6443"
+    [servers.default.healthcheck]
+    kind = "ping"
+    interval = "2s"
+    ping_timeout_duration = "500ms"
+    [servers.default.discovery]
+    kind = "static"
+    static_list = [
+      "192.168.35.12:6443 sni=storage-cluster.lab.erdii.net",
+      "192.168.35.13:6443 sni=storage-cluster.lab.erdii.net",
+      "192.168.35.16:6443 sni=storage-cluster.lab.erdii.net"
+    ]

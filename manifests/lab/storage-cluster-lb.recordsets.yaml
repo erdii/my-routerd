@@ -1,0 +1,23 @@
+apiVersion: dns.routerd.net/v1alpha1
+kind: RecordSet
+metadata:
+  name: storage-cluster-lb-a
+  namespace: network-system
+recordSet:
+  dnsName: storage-cluster.lab.erdii.net
+  ttl: 15m
+  type: A
+  a:
+  - 192.168.35.50
+---
+apiVersion: dns.routerd.net/v1alpha1
+kind: RecordSet
+metadata:
+  name: storage-cluster-lb-aaaa
+  namespace: network-system
+recordSet:
+  dnsName: storage-cluster.lab.erdii.net
+  ttl: 15m
+  type: AAAA
+  aaaa:
+  - fd37:dc42:5e0a:35::50
